@@ -1,8 +1,6 @@
 #程序
 Toolkit = "Toolkit.7z"
 Toolkit_link = "https://file2.xdfboom.com/d/N1/Toolkit/Toolkit.7z?sign=l58kCXMdi7Ivh-Cr5mCSuhSpGAHFkJGDjqPckqqWS3I=:0"
-Python = "Python.7z"
-Python_link = "https://file2.xdfboom.com/d/N1/Toolkit/Python.7z?sign=Sci8dUvtwd-ihgfwWcK7D0vMrlF1LUzZf3Nh7YBix8M=:0"
 #GAPPS Android11
 ga111 = "crDroid.7z"
 ga111url = "https://file2.xdfboom.com/d/N1/Generic_System_Image/GAPPS/Android11/crDroid.7z?sign=mBI98Jpfl5cHph3hQGstF95bLtP7gijhcOFmryLkohI=:0"
@@ -35,12 +33,12 @@ RPurl = "https://file2.xdfboom.com/d/N1/Recovery_package.7z?sign=MhBwY6WsLYHJT4i
 
 #程序
 Toolkit_TEST = "Toolkit.7z"
-Toolkit_link_TEST = "http://10.0.0.3:8080/d/N1/Toolkit/Toolkit.7z?sign=LxguVrVs1nqd0nGVcr-z4E6kTTPnYUH9JaNPiMSLhf0=:0"
+Toolkit_link_TEST = "http://10.0.0.2:65535/d/N1/Toolkit/Toolkit.7z?sign=LxguVrVs1nqd0nGVcr-z4E6kTTPnYUH9JaNPiMSLhf0=:0"
 Python_TEST = "Python.7z"
 Python_link_TEST = "http://10.0.0.3:8080/d/N1/Toolkit/Python.7z?sign=tHvrtWX7fCo4qjM_r3UAayVfUlcLR43HBjJ6aTfS0RI=:0"
 #GAPPS Android13
 ga102_TEST = "Resurrection_Remix.7z"
-ga102url_TEST = "http://10.0.0.3:8080/d/N1/Generic_System_Image/GAPPS/Android10/Resurrection_Remix.7z?sign=BaFIL_vv27-Rhyk6dUj5PYe6ENk9QqKg4NgCkwyeaMA=:0"
+ga102url_TEST = "http://10.0.0.2:65535/d/N1/Generic_System_Image/GAPPS/Android10/Resurrection_Remix.7z?sign=BaFIL_vv27-Rhyk6dUj5PYe6ENk9QqKg4NgCkwyeaMA=:0"
 
 
 system_list = [

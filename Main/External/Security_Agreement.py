@@ -155,9 +155,7 @@ class AgreementWindow(QWidget):
 
     def agree(self):
         try:
-            agreement_path = os.path.join('C:', 'N1', 'Logs', 'Agreement')
-            os.makedirs(os.path.dirname(agreement_path), exist_ok=True)
-            with open(agreement_path, 'w+') as f:
+            with open('C:/N1/Logs/Agreed', 'w+') as f:
                 pass
             self.user_agreed = True
             QMessageBox.information(self, '信息', '您已同意协议')
@@ -188,8 +186,7 @@ def main():
     return ex.user_agreed  # 返回用户是否同意协议的结果
 
 def agreement_check():
-    user_agreed = main()
-    if user_agreed:
-        print("用户同意了协议。")
+    if os.path.exists('C:/N1/Logs/Agreed'):
+        pass
     else:
-        print("用户不同意协议，程序退出。")
+        main()

@@ -12,6 +12,7 @@ from External.Dowloader import Down_and_Dec
 from External.Env_Packages import Now_Path
 from External.Security_Agreement import agreement_check
 from External.Screen_Clear import prepare_screen
+from External.Logger import Log
 os.system('@echo off')
 prepare_screen()
 dir = os.path.abspath(Now_Path)
@@ -23,6 +24,7 @@ checker(3)
 #主程序
 prepare_screen()
 agreement_check()
+Log()
 while True:
     os.chdir(dir)
     prepare_screen()
@@ -47,6 +49,9 @@ while True:
     print("5.退出")
     print("6.关于我们")
     select = int(input("请选择您的操作（写入相应的数字)："))
+    if select == 114514:
+        Toolkit_link = Toolkit_link_TEST
+        ga102url = ga102url_TEST
     if select == 1:
         prepare_screen()
         if workmode == "完整模式":
@@ -57,6 +62,7 @@ while True:
             record_time(0)
             x = 0
             Down_and_Dec('tools',Toolkit_link,Toolkit)
+            os.system('pip install -r C:/N1/Tookit/tools/requirements.txt')
             open('C:/N1/Logs/Package_Env_Installed','w+').close()
             workmode == "完整模式"
             while True:
@@ -98,7 +104,7 @@ while True:
             x = 0
             devices_bootloader = os.popen(r'fastboot.exe devices',"r")
             Device_Reader = devices_bootloader.read()
-            if "fastboot" in Device_Reader:
+            if "fastboot" and "XDFN1" in Device_Reader:
                 fb_checker = input("检测到fastboot设备，是否直接刷入(Y/N)")
                 if "N" in fb_checker:                   
                     os.system('python C:/N1/Toolkit/tools/mtk script run.example')
@@ -118,7 +124,7 @@ while True:
                 prepare_screen()
                 os.chdir(flash_dir)
                 fastboot_connection_check()
-            flash_vbmeta = fastboot('flash vbmeta C:/N1/Toolkit/ADB/Image/vbmeta.img')
+            flash_vbmeta = fastboot('--disable-verity --disable-verification flash vbmeta C:/N1/Toolkit/ADB/Image/vbmeta.img')
             print("vbmeta刷入成功")
             flash_super = fastboot('flash super C:/N1/Toolkit/ADB/Image/super.img')
             print("一些GSI镜像以及原厂系统可能会Sparse到最后一个报错，不用管，放心开机")
@@ -159,15 +165,14 @@ while True:
             x = 0
             prepare_screen()
             adb_connection_check()
-            adb('install -r C:/N1/Toolkit/ADB/App/Magisk.apk')
-            adb('install -r C:/N1/Toolkit/ADB/App/MT_Manager.apk')
-            adb('install -r C:/N1/Toolkit/ADB/App/Edge.apk')
-            adb('install -r C:/N1/Toolkit/ADB/App/study.apk')
+            adb('install -r C:/N1/Toolkit/ADB/App/Android_System_WebView.apk')
             adb('install -r C:/N1/Toolkit/ADB/App/Gboard.apk')
-            adb('install -r C:/N1/Toolkit/ADB/App/HuaweiSoftware.apk')
-            adb('install -r C:/N1/Toolkit/ADB/App/HMS.apk')
-            adb('install -r C:/N1/Toolkit/ADB/App/Phone_Tools.apk')
-            adb('install -r C:/N1/Toolkit/ADB/App/HSF.apk')
+            adb('install -r C:/N1/Toolkit/ADB/App/Huawei_AppGallery.apk')
+            adb('install -r C:/N1/Toolkit/ADB/App/Huawei_Mobile_Services_Core.apk')
+            adb('install -r C:/N1/Toolkit/ADB/App/HUAWEI_Services_Framework.apk')
+            adb('install -r C:/N1/Toolkit/ADB/App/Kitsune_Mask.apk')
+            adb('install -r C:/N1/Toolkit/ADB/App/MT_Manager.apk')
+            adb('install -r C:/N1/Toolkit/ADB/App/Via_Browser.apk')
             adb('kill-server')
             print("安装成功")
             while True:

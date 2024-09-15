@@ -264,14 +264,14 @@ def main(download_url, filename):
     app = QApplication(sys.argv)
     window = DownloadApp(download_url, filename) 
     window.show() 
-    sys.exit(app.exec())
+    app.exec()
 
 
 def Down_and_Dec(type,download_url,filename):
     main(download_url, filename)
     if type == 'image':
         Unzip(filename,'C:/N1/Toolkit/ADB/Image/')
-        shutil.move(filename,'C:/N1/Cache')
+        shutil.move(filename,'C:/N1/Cache/')
     if type == 'tools':
         Unzip(filename,'C:/N1/')
         os.remove(filename)
