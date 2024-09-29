@@ -27,7 +27,7 @@ def adb_connection_check():
             time.sleep(1)
 
 def fastboot(config):
-    fb_use = os.path.join(flash_dir, 'fastboot.exe ' + config)
+    fb_use = os.path.join(flash_dir,'fastboot.exe ' + config)
     subprocess.run(fb_use, shell=True)
 
 def fastboot_connection_check():

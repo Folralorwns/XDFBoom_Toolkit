@@ -52,6 +52,7 @@ while True:
     if select == 114514:
         Toolkit_link = Toolkit_link_TEST
         ga102url = ga102url_TEST
+        system_list = system_list_TEST
     if select == 1:
         prepare_screen()
         if workmode == "完整模式":
@@ -79,6 +80,7 @@ while True:
             while True:
                 os.system('cls')
                 os.system('color f9')
+                os.chdir(flash_dir)
                 # 显示系统列表，只包含系统名称、安卓版本和是否包含谷歌套件
                 print(tabulate([[sys['编号'], sys['系统名称'], sys['安卓版本'], sys['包含谷歌套件']] for sys in system_list], headers=['系统名称', '安卓版本', '包含谷歌套件'], tablefmt='fancy_grid'))
                 try:
@@ -122,7 +124,6 @@ while True:
                 print("现在，请立即拔线")
                 time.sleep(3)
                 prepare_screen()
-                os.chdir(flash_dir)
                 fastboot_connection_check()
             flash_vbmeta = fastboot('--disable-verity --disable-verification flash vbmeta C:/N1/Toolkit/ADB/Image/vbmeta.img')
             print("vbmeta刷入成功")

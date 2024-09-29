@@ -36,7 +36,7 @@ Toolkit_TEST = "Toolkit.7z"
 Toolkit_link_TEST = "http://10.0.0.2:65535/d/N1/Toolkit/Toolkit.7z?sign=LxguVrVs1nqd0nGVcr-z4E6kTTPnYUH9JaNPiMSLhf0=:0"
 Python_TEST = "Python.7z"
 Python_link_TEST = "http://10.0.0.3:8080/d/N1/Toolkit/Python.7z?sign=tHvrtWX7fCo4qjM_r3UAayVfUlcLR43HBjJ6aTfS0RI=:0"
-#GAPPS Android13
+#GAPPS Android10
 ga102_TEST = "Resurrection_Remix.7z"
 ga102url_TEST = "http://10.0.0.2:65535/d/N1/Generic_System_Image/GAPPS/Android10/Resurrection_Remix.7z?sign=BaFIL_vv27-Rhyk6dUj5PYe6ENk9QqKg4NgCkwyeaMA=:0"
 
