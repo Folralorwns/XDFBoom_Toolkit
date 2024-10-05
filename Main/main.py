@@ -171,7 +171,7 @@ while True:
             adb('install -r C:/N1/Toolkit/ADB/App/Huawei_AppGallery.apk')
             adb('install -r C:/N1/Toolkit/ADB/App/Huawei_Mobile_Services_Core.apk')
             adb('install -r C:/N1/Toolkit/ADB/App/HUAWEI_Services_Framework.apk')
-            adb('install -r C:/N1/Toolkit/ADB/App/Kitsune_Mask.apk')
+            # adb('install -r C:/N1/Toolkit/ADB/App/Kitsune_Mask.apk')
             adb('install -r C:/N1/Toolkit/ADB/App/MT_Manager.apk')
             adb('install -r C:/N1/Toolkit/ADB/App/Via_Browser.apk')
             adb('kill-server')
