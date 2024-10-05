@@ -7,7 +7,7 @@ import logging
 from hashlib import sha1
 from shutil import copyfile, rmtree
 
-from .lang import Language, langget
+from lang import Language, langget
 
 def getsha1(filename):
     with open(filename, 'rb') as f:
