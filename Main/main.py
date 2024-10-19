@@ -63,7 +63,6 @@ while True:
             record_time(0)
             x = 0
             Down_and_Dec('tools',Toolkit_link,Toolkit)
-            os.system('pip install -r C:\\N1\\Toolkit\\tools\\requirements.txt')
             open('C:/N1/Logs/Package_Env_Installed','w+').close()
             workmode == "完整模式"
             while True:
