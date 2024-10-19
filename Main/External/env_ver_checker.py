@@ -71,7 +71,7 @@ def checker(config):
             install_python(Python_Installer_Path)
             print("正在安装pip库")
             os.system('pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/')
-            os.system('pip install -r C:\\N1\\Toolkit\\tools\\requirements.txt --no-progress-bar')
+            os.system('pip install -r C:\\N1\\Toolkit\\tools\\requirements.txt')
             # 创建或更新文件
             open('C:/N1/Logs/Env_Done', 'w+').close()
             print("驱动安装成功，按任意键使电脑重启")
