@@ -108,7 +108,7 @@ while True:
             if "fastboot" and "XDFN1" in Device_Reader:
                 fb_checker = input("检测到fastboot设备，是否直接刷入(Y/N)")
                 if "N" in fb_checker:                   
-                    os.system('python C:/N1/Toolkit/tools/mtk script run.example')
+                    os.system('python C:/N1/Toolkit/tools/mtk script C:/N1/Toolkit/tools/run.example')
                     print("现在，请立即拔线")
                     time.sleep(5)
                     prepare_screen()
@@ -119,7 +119,7 @@ while True:
                     os.chdir(flash_dir)
                     pass
             else:
-                os.system('python C:/N1/Toolkit/tools/mtk script run.example')
+                os.system('python C:/N1/Toolkit/tools/mtk script C:/N1/Toolkit/tools/run.example')
                 print("现在，请立即拔线")
                 time.sleep(3)
                 prepare_screen()

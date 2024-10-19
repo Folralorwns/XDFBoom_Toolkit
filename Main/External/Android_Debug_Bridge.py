@@ -40,7 +40,7 @@ def fastboot_connection_check():
             print("设备已连接")
             break
         else:
-            os.system('f9')
+            os.system('color f9')
             print("请拔线并等待设备重启至bootloader")
             print("正在检测fastboot设备...")
             time.sleep(1)
