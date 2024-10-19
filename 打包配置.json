@@ -7,7 +7,7 @@
   },
   {
    "optionDest": "filenames",
-   "value": "D:/\u65b0\u4e1c\u65b9N1/\u6e90\u7801/Main/main.py"
+   "value": "D:/\u5feb\u901f\u8bbf\u95ee/DOCUMENT/GitHub/XDFBoom_Toolkit/Main/main.py"
   },
   {
    "optionDest": "onefile",
@@ -19,7 +19,7 @@
   },
   {
    "optionDest": "icon_file",
-   "value": "D:/\u65b0\u4e1c\u65b9N1/\u6e90\u7801/\u56fe\u6807.ico"
+   "value": "D:/\u5feb\u901f\u8bbf\u95ee/DOCUMENT/GitHub/XDFBoom_Toolkit/\u56fe\u6807.ico"
   },
   {
    "optionDest": "ascii",
@@ -75,19 +75,19 @@
   },
   {
    "optionDest": "datas",
-   "value": "D:/\u65b0\u4e1c\u65b9N1/\u6e90\u7801/Main/ico;ico/"
+   "value": "D:/\u5feb\u901f\u8bbf\u95ee/DOCUMENT/GitHub/XDFBoom_Toolkit/Main/Env_Programs;Env_Programs/"
   },
   {
    "optionDest": "datas",
-   "value": "D:/\u65b0\u4e1c\u65b9N1/\u6e90\u7801/Main/External;External/"
+   "value": "D:/\u5feb\u901f\u8bbf\u95ee/DOCUMENT/GitHub/XDFBoom_Toolkit/Main/Drivers;Drivers/"
   },
   {
    "optionDest": "datas",
-   "value": "D:/\u65b0\u4e1c\u65b9N1/\u6e90\u7801/Main/Env_Programs;Env_Programs/"
+   "value": "D:/\u5feb\u901f\u8bbf\u95ee/DOCUMENT/GitHub/XDFBoom_Toolkit/Main/External;External/"
   },
   {
    "optionDest": "datas",
-   "value": "D:/\u65b0\u4e1c\u65b9N1/\u6e90\u7801/Main/Drivers;Drivers/"
+   "value": "D:/\u5feb\u901f\u8bbf\u95ee/DOCUMENT/GitHub/XDFBoom_Toolkit/Main/ico;ico/"
   }
  ],
  "nonPyinstallerOptions": {
