@@ -9,9 +9,8 @@
 </div>
 
 > [!WARNING]
+> 如果您的程序出现了类似闪退等情况，请发送issue
 > 
-> 
-
 > [!TIP]
 > 提示：打包请使用auto-py-to-exe
 > [!IMPORTANT]  
