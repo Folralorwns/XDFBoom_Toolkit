@@ -1,4 +1,3 @@
-import os
 import subprocess
 from .Env_Packages import Env_7zip_path,Now_Path
 
