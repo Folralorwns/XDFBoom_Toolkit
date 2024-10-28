@@ -1,32 +1,32 @@
 #程序
 Toolkit = "Toolkit.7z"
-Toolkit_link = "https://file2.xdfboom.com/d/N1/Toolkit/Toolkit.7z?sign=l58kCXMdi7Ivh-Cr5mCSuhSpGAHFkJGDjqPckqqWS3I=:0"
+Toolkit_link = "https://github.com/Folralorwns/XDFBoom_Toolkit/releases/download/Toolkit_Package/Toolkit.7z"
 #GAPPS Android11
 ga111 = "crDroid.7z"
-ga111url = "https://file2.xdfboom.com/d/N1/Generic_System_Image/GAPPS/Android11/crDroid.7z?sign=mBI98Jpfl5cHph3hQGstF95bLtP7gijhcOFmryLkohI=:0"
+ga111url = "https://github.com/Folralorwns/XDFBoom_Toolkit/releases/download/GAPPS_Android11/crDroid.7z"
 ga112 = "LineageOS.7z"
-ga112url = "https://file2.xdfboom.com/d/N1/Generic_System_Image/GAPPS/Android11/LineageOS.7z?sign=R5UB9tLOmD91W_r6xTSqvzA7mjQcGrITeae1ROTVRf8=:0"
+ga112url = "https://github.com/Folralorwns/XDFBoom_Toolkit/releases/download/GAPPS_Android11/LineageOS.7z"
 ga113 = "DotOS.7z"
-ga113url = "https://file2.xdfboom.com/d/N1/Generic_System_Image/GAPPS/Android11/DotOS.7z?sign=WdeHirnNBzZzx_MEMCg-ND6OHVIe2VocSocGrksSOcY=:0"
+ga113url = "https://github.com/Folralorwns/XDFBoom_Toolkit/releases/download/GAPPS_Android11/DotOS.7z"
 #GAPPS Android10
 ga101 = "HavocOS.7z"
-ga101url = "https://file2.xdfboom.com/d/N1/Generic_System_Image/GAPPS/Android10/HavocOS.7z?sign=rgLjwSlMekgCAjpouRtDk0FCTVUmHPDfrNcaTFG3aEE=:0"
+ga101url = "https://github.com/Folralorwns/XDFBoom_Toolkit/releases/download/GAPPS_Android10/HavocOS.7z"
 ga102 = "Resurrection_Remix.7z"
-ga102url = "https://file2.xdfboom.com/d/N1/Generic_System_Image/GAPPS/Android10/Resurrection_Remix.7z?sign=fLar8tC2CvJ_vJPkf84OiALzb5v-gmUKF_fnLqAGsDc=:0"
+ga102url = "https://github.com/Folralorwns/XDFBoom_Toolkit/releases/download/GAPPS_Android10/Resurrection_Remix.7z"
 #Vanilla Android 11
 va111 = "LineageOS.7z"
-va111url = "https://file2.xdfboom.com/d/N1/Generic_System_Image/VANILLIA/Android11/LineageOS.7z?sign=QDRyyOsLWyKvIU414GxtYsYomH4SxphCXMss4xG346E=:0"
+va111url = "https://github.com/Folralorwns/XDFBoom_Toolkit/releases/download/Vanillia_Android11/LineageOS.7z"
 va112 = "DotOS.7z"
-va112url = "https://file2.xdfboom.com/d/N1/Generic_System_Image/VANILLIA/Android11/DotOS.7z?sign=C_a9YA-cai-Ao4FA5NKQrvTEziOCXkc0tOO1jApr0rQ=:0"
+va112url = "https://github.com/Folralorwns/XDFBoom_Toolkit/releases/download/Vanillia_Android11/DotOS.7z"
 va113 = "crDroid.7z"
-va113url = "https://file2.xdfboom.com/d/N1/Generic_System_Image/VANILLIA/Android11/crDroid.7z?sign=44Y57mxwgLliwfcxSbInq0Be2Vbc4sxOQ5YFzXANWE4=:0"
+va113url = "https://github.com/Folralorwns/XDFBoom_Toolkit/releases/download/Vanillia_Android11/crDroid.7z"
 #Vanilla Android 10
 va101 = "LineageOS.7z"
-va101url = "https://file2.xdfboom.com/d/N1/Generic_System_Image/VANILLIA/Android10/LineageOS.7z?sign=iSyIlPElwOgPcMKsWgyOaC81gttbcRl3FIKIMlD5K2U=:0"
+va101url = "https://github.com/Folralorwns/XDFBoom_Toolkit/releases/download/VANILLIA_Android10/LineageOS.7z"
 va102 = "HavocOS.7z"
-va102url = "https://file2.xdfboom.com/d/N1/Generic_System_Image/VANILLIA/Android10/HavocOS.7z?sign=ta04K4brdFlD2Z9L4Xqtl0VDqln9_H1sao2M6Pwkokc=:0"
+va102url = "https://github.com/Folralorwns/XDFBoom_Toolkit/releases/download/VANILLIA_Android10/HavocOS.7z"
 va103 = "Resurrection_Remix.7z"
-va103url = "https://file2.xdfboom.com/d/N1/Generic_System_Image/VANILLIA/Android10/Resurrection_Remix.7z?sign=sHoo2NQzvrvMMTz45YigIlJ4NHzuag1BdYo95TTAS7o=:0"
+va103url = "https://github.com/Folralorwns/XDFBoom_Toolkit/releases/download/VANILLIA_Android10/Resurrection_Remix.7z"
 #原厂系统包
 RP = "Recovery_package.7z"
 RPurl = "https://file2.xdfboom.com/d/N1/Recovery_package.7z?sign=MhBwY6WsLYHJT4iVtso3ld_nqe1f29hxSCw-UtPRI8I=:0"
@@ -34,8 +34,6 @@ RPurl = "https://file2.xdfboom.com/d/N1/Recovery_package.7z?sign=MhBwY6WsLYHJT4i
 #程序
 Toolkit_TEST = "Toolkit.7z"
 Toolkit_link_TEST = "http://10.0.0.2:65535/d/N1/Toolkit/Toolkit.7z?sign=LxguVrVs1nqd0nGVcr-z4E6kTTPnYUH9JaNPiMSLhf0=:0"
-Python_TEST = "Python.7z"
-Python_link_TEST = "http://10.0.0.3:8080/d/N1/Toolkit/Python.7z?sign=tHvrtWX7fCo4qjM_r3UAayVfUlcLR43HBjJ6aTfS0RI=:0"
 #GAPPS Android10
 ga102_TEST = "Resurrection_Remix.7z"
 ga102url_TEST = "http://10.0.0.2:65535/d/N1/Generic_System_Image/GAPPS/Android10/Resurrection_Remix.7z?sign=BaFIL_vv27-Rhyk6dUj5PYe6ENk9QqKg4NgCkwyeaMA=:0"
