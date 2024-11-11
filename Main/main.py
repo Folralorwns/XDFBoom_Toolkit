@@ -92,8 +92,7 @@ while True:
             os.system('pause')
             os.system('cls')
             print("程序开始")
-            devices_bootloader = os.popen(r'fastboot.exe devices',"r")
-            Device_Reader = devices_bootloader.read()
+            fastboot_connection_check
             if "fastboot" and "XDFN1" in Device_Reader:
                 fb_checker = input("检测到fastboot设备，是否直接刷入(Y/N)")
                 if "N" in fb_checker:                   

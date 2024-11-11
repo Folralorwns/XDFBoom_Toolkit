@@ -20,7 +20,7 @@ def adb_connection_check():
         
         if "XDFN1" in Device_Manager and "unauthorized" not in Device_Manager:
             print("[状态] ADB设备已接入")
-            break
+            return "Connected"
         else:
             print("请打开USB调试并连接学习机")
             print("正在检测adb设备...")
@@ -38,7 +38,7 @@ def fastboot_connection_check():
         print(Device_Reader)
         if "XDFN1" in Device_Reader and "fastboot" in Device_Reader:
             print("设备已连接")
-            break
+            return "Connected"
         else:
             os.system('color f9')
             print("请拔线并等待设备重启至bootloader")
