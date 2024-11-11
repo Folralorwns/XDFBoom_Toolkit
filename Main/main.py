@@ -4,7 +4,6 @@ import time
 from tabulate import tabulate
 import webbrowser
 from External.env_ver_checker import checker,workmode
-from External.Record import record_time
 from External.ROM_Dowload_Link import *
 from External.Android_Debug_Bridge import flash_dir,adb,adb_shell,adb_connection_check,fastboot,fastboot_connection_check
 from External.Dowloader import Down_and_Dec
@@ -58,15 +57,9 @@ while True:
             time.sleep(3)
             pass
         else:
-            record_time(0)
-            x = 0
             Down_and_Dec('tools',Toolkit_link,Toolkit)
             open('C:/N1/Logs/Package_Env_Installed','w+').close()
             workmode == "完整模式"
-            while True:
-                x += 1
-                if x > 1e6:
-                    break
             time.sleep(3)
     elif select == 2:
         prepare_screen()
@@ -99,8 +92,6 @@ while True:
             os.system('pause')
             os.system('cls')
             print("程序开始")
-            record_time(0)
-            x = 0
             devices_bootloader = os.popen(r'fastboot.exe devices',"r")
             Device_Reader = devices_bootloader.read()
             if "fastboot" and "XDFN1" in Device_Reader:
@@ -148,19 +139,13 @@ while True:
             print("刚刷完机后的第一次开机可能会持续1~3分钟，请耐心等待")
             print("正在清理super.img")
             os.remove('C:/N1/Toolkit/ADB/Image/super.img')
-            time.sleep(5)
-            while True:
-                x += 1
-                if x > 1e6:
-                    break
-            record_time(1)
+            print('清理完成！')
+            time.sleep(3)
     elif select == 3:
         if  workmode== "受限":
             print("请去先去配置再使用此功能！！！")
             time.sleep(3)
         elif workmode == "完整模式":
-            record_time(0)
-            x = 0
             prepare_screen()
             adb_connection_check()
             adb('install -r C:/N1/Toolkit/ADB/App/Android_System_WebView.apk')
@@ -173,19 +158,12 @@ while True:
             adb('install -r C:/N1/Toolkit/ADB/App/Via_Browser.apk')
             adb('kill-server')
             print("安装成功")
-            while True:
-                x += 1
-                if x > 1e6:
-                    break
-            record_time(1)
             time.sleep(5)
     elif select == 4:
         if workmode== "受限":
             print("请您先去配置再使用此功能！！！")
             time.sleep(3)
         elif workmode== "完整模式":
-            record_time(0)
-            x = 0
             prepare_screen()
             adb_connection_check()
             adb_shell('settings delete global captive_portal_http_url')
@@ -194,11 +172,6 @@ while True:
             adb_shell('settings put global captive_portal_https_url https://connect.rom.miui.com/generate_204')
             adb('kill-server')
             print("解决成功")
-            while True:
-                x += 1
-                if x > 1e6:
-                    break
-            record_time(1)
         time.sleep(5)
     elif select == 5:
         prepare_screen()
