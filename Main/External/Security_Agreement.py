@@ -4,7 +4,7 @@ import datetime
 from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, QMessageBox
 from PyQt6.QtCore import Qt, QTimer, QPoint
 from PyQt6.QtGui import QFont, QIcon
-from .Env_Packages import ico_path
+from .Path_Dict import ico_path
 
 # 定义版本号和工具包版本
 MAIN_VERSION = "V6.0.5"

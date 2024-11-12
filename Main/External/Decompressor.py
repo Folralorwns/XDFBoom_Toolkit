@@ -1,5 +1,5 @@
 import subprocess
-from .Env_Packages import Env_7zip_path,Now_Path
+from .Path_Dict import Env_7zip_path,Now_Path
 
 # 拼接程序路径，使用 os.path.join 来确保路径拼接正确
 def Unzip(file_name: str, target_path: str):

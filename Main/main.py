@@ -7,10 +7,9 @@ from External.env_ver_checker import checker,workmode
 from External.ROM_Dowload_Link import *
 from External.Android_Debug_Bridge import flash_dir,adb,adb_shell,adb_connection_check,fastboot,fastboot_connection_check
 from External.Dowloader import Down_and_Dec
-from External.Env_Packages import Now_Path
+from Main.External.Path_Dict import Now_Path
 from External.Security_Agreement import agreement_check
 from External.Screen_Clear import prepare_screen
-from External.Logger import Log
 os.system('@echo off')
 prepare_screen()
 dir = os.path.abspath(Now_Path)
@@ -21,7 +20,6 @@ checker(3)
 #主程序
 prepare_screen()
 agreement_check()
-Log()
 while True:
     os.chdir(dir)
     prepare_screen()
@@ -92,8 +90,8 @@ while True:
             os.system('pause')
             os.system('cls')
             print("程序开始")
-            fastboot_connection_check
-            if "fastboot" and "XDFN1" in Device_Reader:
+            Device_Reader =  fastboot_connection_check()
+            if 'Connected' in Device_Reader:
                 fb_checker = input("检测到fastboot设备，是否直接刷入(Y/N)")
                 if "N" in fb_checker:                   
                     os.system('python C:/N1/Toolkit/tools/mtk script C:/N1/Toolkit/tools/run.example')

@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QLabel
 from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
-from Env_Packages import ico_path
+from Main.External.Path_Dict import ico_path
 import sys
 
 class QLabelDemo(QMainWindow):

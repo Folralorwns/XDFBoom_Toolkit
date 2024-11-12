@@ -4,7 +4,7 @@ import platform
 import sys
 import subprocess
 from PySide6.QtWidgets import QApplication, QFileDialog
-from .Env_Packages import Now_Path,Python_Installer_Path
+from .Path_Dict import Now_Path,Python_Installer_Path
 from .Disk_Select import select_drive
 
 workmode = None
