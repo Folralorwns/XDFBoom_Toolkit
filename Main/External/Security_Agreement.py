@@ -1,10 +1,9 @@
 import sys
 import os
-import datetime
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, QMessageBox, QTabWidget, QScrollArea
-from PySide6.QtCore import Qt, QTimer, QPoint
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, QMessageBox, QTabBar, QScrollArea, QStackedWidget
+from PySide6.QtCore import Qt, QPoint, QPropertyAnimation
 from PySide6.QtGui import QFont, QIcon
-from Path_Dict import ico_path,Agreement_Path_Open_Source,Agreement_Path_User
+from Path_Dict import ico_path,Agreement_Path_User,Agreement_Path_Open_Source
 
 # 定义版本号和工具包版本
 MAIN_VERSION = "V6.0.5"
@@ -24,18 +23,50 @@ class AgreementWindow(QWidget):
         self.setStyleSheet("background-color: white;")
         self.setWindowIcon(QIcon(str(ico_path)))  # 确保路径是字符串类型
 
-        # 当前时间
-        nowtime = datetime.datetime.now()
-        time_str = f"现在是{nowtime.year}年{nowtime.month}月{nowtime.day}日{nowtime.hour}时{nowtime.minute}分"
+        # 创建 QTabBar 和 QStackedWidget
+        self.tab_bar = QTabBar(self)
+        self.tab_bar.setShape(QTabBar.Shape.RoundedNorth)
+        self.tab_bar.setTabsClosable(False)
+        self.tab_bar.currentChanged.connect(self.animate_tab_switch)
 
-        # 协议选项卡
-        self.tab_widget = QTabWidget(self)
-        self.load_agreements(time_str)
+        # 自定义 QTabBar 样式
+        self.tab_bar.setStyleSheet("""
+            QTabBar::tab {
+                background: #e0e0e0;
+                color: #333;
+                padding: 4px;
+                margin-right: 8px;
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+                font-size: 14px;
+                min-width: 80px;
+            }
+            QTabBar::tab:selected {
+                background: #28a745;
+                color: white;
+                font-weight: bold;
+            }
+            QTabBar::tab:hover {
+                background: #34c759;
+                color: white;
+            }
+            QTabBar::tab:selected:hover {
+                background: #218838;
+                color: white;
+            }
+            QTabBar::tab:!selected {
+                background: #d0d0d0;
+                color: #555;
+            }
+        """)
+
+        self.stacked_widget = QStackedWidget(self)
+        self.load_agreements()
 
         # 同意按钮
         self.agree_button = QPushButton('同意', self)
         self.agree_button.clicked.connect(self.agree)
-        self.agree_button.setEnabled(False)
+        self.agree_button.setEnabled(True)
         self.agree_button.setStyleSheet("""
             QPushButton {
                 background-color: #28a745;
@@ -43,10 +74,6 @@ class AgreementWindow(QWidget):
                 font-size: 16px;
                 border-radius: 10px;
                 padding: 10px;
-            }
-            QPushButton:disabled {
-                background-color: #6c757d;
-                color: #cccccc;
             }
             QPushButton:hover {
                 background-color: #218838;
@@ -59,7 +86,7 @@ class AgreementWindow(QWidget):
         # 不同意按钮
         self.disagree_button = QPushButton('不同意', self)
         self.disagree_button.clicked.connect(self.disagree)
-        self.disagree_button.setEnabled(False)
+        self.disagree_button.setEnabled(True)
         self.disagree_button.setStyleSheet("""
             QPushButton {
                 background-color: #dc3545;
@@ -67,10 +94,6 @@ class AgreementWindow(QWidget):
                 font-size: 16px;
                 border-radius: 10px;
                 padding: 10px;
-            }
-            QPushButton:disabled {
-                background-color: #6c757d;
-                color: #cccccc;
             }
             QPushButton:hover {
                 background-color: #c82333;
@@ -82,21 +105,19 @@ class AgreementWindow(QWidget):
 
         # 布局
         vbox = QVBoxLayout()
-        vbox.addWidget(self.tab_widget)
+        vbox.addWidget(self.tab_bar)
+        vbox.addWidget(self.stacked_widget)
         vbox.addWidget(self.agree_button)
         vbox.addWidget(self.disagree_button)
         self.setLayout(vbox)
 
-        # 倒计时
-        self.init_countdown(15)
-
-    def load_agreements(self, time_str):
+    def load_agreements(self):
         """
         加载多个协议文件并显示在选项卡中
         """
         agreement_files = [Agreement_Path_Open_Source,Agreement_Path_User]  # 协议文件列表
         for idx, file_path in enumerate(agreement_files):
-            agreement_text = time_str + "\n\n" + self.get_agreement_text_from_file(file_path)
+            agreement_text = self.get_agreement_text_from_file(file_path)
             tab_label = f"协议 {idx + 1}"
 
             # 创建滚动区域
@@ -164,15 +185,25 @@ class AgreementWindow(QWidget):
 
             # 将标签添加到滚动区域中
             scroll_area.setWidget(label)
-            self.tab_widget.addTab(scroll_area, tab_label)
+            self.stacked_widget.addWidget(scroll_area)
+            self.tab_bar.addTab(tab_label)
 
-    def init_countdown(self, duration):
-        self.countdown = duration
-        self.update_countdown()
+    def animate_tab_switch(self, index):
+        """
+        切换选项卡时添加动画效果
+        """
+        current_widget = self.stacked_widget.currentWidget()
+        next_widget = self.stacked_widget.widget(index)
 
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.update_countdown)
-        self.timer.start(1000)
+        # 创建动画，从当前位置滑动到新的位置
+        animation = QPropertyAnimation(self.stacked_widget, b"geometry")
+        animation.setDuration(300)
+        animation.setStartValue(self.stacked_widget.geometry())
+        animation.setEndValue(self.stacked_widget.geometry().translated(0, 0))
+        animation.start()
+
+        # 设置当前显示的页面
+        self.stacked_widget.setCurrentIndex(index)
 
     def get_agreement_text_from_file(self, file_path):
         """
@@ -183,18 +214,6 @@ class AgreementWindow(QWidget):
                 return file.read()
         except FileNotFoundError:
             return f"协议文件 '{file_path}' 未找到。请确保文件存在。"
-
-    def update_countdown(self):
-        if self.countdown > 0:
-            self.agree_button.setText(f"同意 ({self.countdown}秒后可点击)")
-            self.disagree_button.setText(f"不同意 ({self.countdown}秒后可点击)")
-            self.countdown -= 1
-        else:
-            self.timer.stop()
-            self.agree_button.setEnabled(True)
-            self.disagree_button.setEnabled(True)
-            self.agree_button.setText("同意")
-            self.disagree_button.setText("不同意")
 
     def agree(self):
         try:
