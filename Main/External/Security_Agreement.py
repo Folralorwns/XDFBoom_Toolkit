@@ -1,12 +1,10 @@
 import sys
 import os
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, QTextEdit, QMessageBox, QHBoxLayout
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QIcon
-from pathlib import Path
-
-# 假设 ico_path 是图标路径
-from Path_Dict import ico_path, Now_Path  # ico_path 假设是 Path 对象
+import datetime
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, QMessageBox, QTabWidget
+from PySide6.QtCore import Qt, QTimer, QPoint
+from PySide6.QtGui import QFont, QIcon
+from Path_Dict import ico_path
 
 # 定义版本号和工具包版本
 MAIN_VERSION = "V6.0.5"
@@ -15,87 +13,162 @@ TOOLKIT_VERSION = "V6.0.5"
 class AgreementWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.user_agreed = False  # 用户是否同意协议
-        self.current_protocol_index = 0  # 当前显示的协议文件索引
-        self.protocol_files = []  # 存储协议文件路径
-
-        # 加载协议文件
-        self.load_agreement_files()
-
-        self.initUI()  # 初始化界面
+        self.initUI()
+        self.user_agreed = False  # 用于存储用户是否同意协议
+        self.offset = None  # 用于存储窗口的偏移量
 
     def initUI(self):
         self.setWindowTitle('用户协议')
-
-        # 设置窗口固定大小
         self.setFixedSize(720, 700)
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         self.setStyleSheet("background-color: white;")
+        self.setWindowIcon(QIcon(str(ico_path)))  # 确保路径是字符串类型
 
-        # 设置窗口图标
-        self.setWindowIcon(QIcon(str(ico_path)))  # 转换为字符串路径
+        # 当前时间
+        nowtime = datetime.datetime.now()
+        time_str = f"现在是{nowtime.year}年{nowtime.month}月{nowtime.day}日{nowtime.hour}时{nowtime.minute}分"
 
-        # 创建布局
-        layout = QVBoxLayout()
+        # 协议选项卡
+        self.tab_widget = QTabWidget(self)
+        self.load_agreements(time_str)
 
-        # 协议显示区域
-        self.protocol_text = QTextEdit(self)
-        self.protocol_text.setReadOnly(True)  # 只读模式
-        layout.addWidget(self.protocol_text)
-
-        # 协议跳转按钮
-        button_layout = QHBoxLayout()
+        # 同意按钮
         self.agree_button = QPushButton('同意', self)
-        self.agree_button.clicked.connect(self.on_agree)
-        button_layout.addWidget(self.agree_button)
+        self.agree_button.clicked.connect(self.agree)
+        self.agree_button.setEnabled(False)
+        self.agree_button.setStyleSheet("""
+            QPushButton {
+                background-color: #28a745;
+                color: white;
+                font-size: 16px;
+                border-radius: 10px;
+                padding: 10px;
+            }
+            QPushButton:disabled {
+                background-color: #6c757d;
+                color: #cccccc;
+            }
+            QPushButton:hover {
+                background-color: #218838;
+            }
+            QPushButton:pressed {
+                background-color: #1e7e34;
+            }
+        """)
 
-        self.next_button = QPushButton('下一协议', self)
-        self.next_button.clicked.connect(self.show_next_protocol)
-        button_layout.addWidget(self.next_button)
+        # 不同意按钮
+        self.disagree_button = QPushButton('不同意', self)
+        self.disagree_button.clicked.connect(self.disagree)
+        self.disagree_button.setEnabled(False)
+        self.disagree_button.setStyleSheet("""
+            QPushButton {
+                background-color: #dc3545;
+                color: white;
+                font-size: 16px;
+                border-radius: 10px;
+                padding: 10px;
+            }
+            QPushButton:disabled {
+                background-color: #6c757d;
+                color: #cccccc;
+            }
+            QPushButton:hover {
+                background-color: #c82333;
+            }
+            QPushButton:pressed {
+                background-color: #bd2130;
+            }
+        """)
 
-        layout.addLayout(button_layout)
+        # 布局
+        vbox = QVBoxLayout()
+        vbox.addWidget(self.tab_widget)
+        vbox.addWidget(self.agree_button)
+        vbox.addWidget(self.disagree_button)
+        self.setLayout(vbox)
 
-        # 设置布局
-        self.setLayout(layout)
+        # 倒计时
+        self.init_countdown(15)
 
-        # 显示第一个协议
-        self.show_protocol()
+    def load_agreements(self, time_str):
+        """
+        加载多个协议文件并显示在选项卡中
+        """
+        agreement_files = ['AGPLv3.txt', 'XDFBoom软件使用协议.txt']  # 协议文件列表
+        for idx, file_path in enumerate(agreement_files):
+            agreement_text = time_str + "\n\n" + self.get_agreement_text_from_file(file_path)
+            tab_label = f"协议 {idx + 1}"
+            label = QLabel(agreement_text)
+            label.setAlignment(Qt.AlignmentFlag.AlignTop)
+            label.setWordWrap(True)
+            label.setStyleSheet("color: black; font-size: 16px;")
+            label.setFont(QFont("Microsoft YaHei", 12))
+            self.tab_widget.addTab(label, tab_label)
 
-    def load_agreement_files(self):
-        # 假设协议文件存放在当前目录下的 "agreements" 文件夹
-        agreements_dir = Path(Now_Path) / 'agreements'
-        if agreements_dir.exists():
-            self.protocol_files = list(agreements_dir.glob('*.txt'))  # 读取所有.txt协议文件
+    def init_countdown(self, duration):
+        self.countdown = duration
+        self.update_countdown()
+
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.update_countdown)
+        self.timer.start(1000)
+
+    def get_agreement_text_from_file(self, file_path):
+        """
+        从指定文件路径读取协议文本
+        """
+        try:
+            with open(file_path, 'r', encoding='utf-8') as file:
+                return file.read()
+        except FileNotFoundError:
+            return f"协议文件 '{file_path}' 未找到。请确保文件存在。"
+
+    def update_countdown(self):
+        if self.countdown > 0:
+            self.agree_button.setText(f"同意 ({self.countdown}秒后可点击)")
+            self.disagree_button.setText(f"不同意 ({self.countdown}秒后可点击)")
+            self.countdown -= 1
         else:
-            QMessageBox.warning(self, "警告", "未找到协议文件目录！")
+            self.timer.stop()
+            self.agree_button.setEnabled(True)
+            self.disagree_button.setEnabled(True)
+            self.agree_button.setText("同意")
+            self.disagree_button.setText("不同意")
+
+    def agree(self):
+        try:
+            with open('C:/N1/Logs/Agreed', 'w+') as f:
+                pass
+            self.user_agreed = True
+            QMessageBox.information(self, '信息', '您已同意协议')
             self.close()
+        except Exception as e:
+            QMessageBox.critical(self, '错误', f'无法创建协议文件：{e}')
+            sys.exit(1)
 
-    def show_protocol(self):
-        # 显示当前协议内容
-        if self.protocol_files:
-            with open(self.protocol_files[self.current_protocol_index], 'r', encoding='utf-8') as file:
-                protocol_content = file.read()
-            self.protocol_text.setPlainText(protocol_content)  # 设置协议内容到 QTextEdit
-
-    def show_next_protocol(self):
-        # 切换到下一个协议
-        if self.protocol_files:
-            self.current_protocol_index += 1
-            if self.current_protocol_index < len(self.protocol_files):
-                self.show_protocol()
-            else:
-                QMessageBox.information(self, "提示", "这是最后一份协议。")
-                self.close()
-
-    def on_agree(self):
-        # 用户同意协议后的动作
-        self.user_agreed = True
-        QMessageBox.information(self, "提示", "您已同意协议。")
+    def disagree(self):
+        QMessageBox.warning(self, '不同意', '您不同意协议，程序将退出')
+        self.user_agreed = False
         self.close()
 
-# 启动程序
-if __name__ == '__main__':
+    def mousePressEvent(self, event):
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.offset = event.pos()
+
+    def mouseMoveEvent(self, event):
+        if self.offset is not None and event.buttons() == Qt.MouseButton.LeftButton:
+            self.move(self.pos() + event.pos() - self.offset)
+
+def main():
     app = QApplication(sys.argv)
-    window = AgreementWindow()
-    window.show()
-    sys.exit(app.exec())
+    ex = AgreementWindow()
+    ex.show()
+    app.exec()
+
+def agreement_check():
+    if os.path.exists('C:/N1/Logs/Agreed'):
+        pass
+    else:
+        main()
+
+agreement_check()
