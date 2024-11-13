@@ -1,10 +1,10 @@
 import sys
 import os
 import datetime
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, QMessageBox, QTabWidget
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, QMessageBox, QTabWidget, QScrollArea
 from PySide6.QtCore import Qt, QTimer, QPoint
 from PySide6.QtGui import QFont, QIcon
-from Path_Dict import ico_path
+from Path_Dict import ico_path,Agreement_Path_Open_Source,Agreement_Path_User
 
 # 定义版本号和工具包版本
 MAIN_VERSION = "V6.0.5"
@@ -94,16 +94,77 @@ class AgreementWindow(QWidget):
         """
         加载多个协议文件并显示在选项卡中
         """
-        agreement_files = ['AGPLv3.txt', 'XDFBoom软件使用协议.txt']  # 协议文件列表
+        agreement_files = [Agreement_Path_Open_Source,Agreement_Path_User]  # 协议文件列表
         for idx, file_path in enumerate(agreement_files):
             agreement_text = time_str + "\n\n" + self.get_agreement_text_from_file(file_path)
             tab_label = f"协议 {idx + 1}"
+
+            # 创建滚动区域
+            scroll_area = QScrollArea()
+            scroll_area.setWidgetResizable(True)
+
+            # 自定义滚动条样式
+            scroll_area.setStyleSheet("""
+                QScrollBar:vertical {
+                    background: #f0f0f0;
+                    width: 12px;
+                    margin: 0px 0px 0px 0px;
+                    border-radius: 6px;
+                }
+                QScrollBar::handle:vertical {
+                    background: #c4c4c4;
+                    min-height: 20px;
+                    border-radius: 6px;
+                }
+                QScrollBar::handle:vertical:hover {
+                    background: #a0a0a0;
+                }
+                QScrollBar::handle:vertical:pressed {
+                    background: #888888;
+                }
+                QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+                    background: none;
+                }
+                QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+                    background: #f0f0f0;
+                    border-radius: 6px;
+                }
+                QScrollBar:horizontal {
+                    background: #f0f0f0;
+                    height: 12px;
+                    margin: 0px 0px 0px 0px;
+                    border-radius: 6px;
+                }
+                QScrollBar::handle:horizontal {
+                    background: #c4c4c4;
+                    min-width: 20px;
+                    border-radius: 6px;
+                }
+                QScrollBar::handle:horizontal:hover {
+                    background: #a0a0a0;
+                }
+                QScrollBar::handle:horizontal:pressed {
+                    background: #888888;
+                }
+                QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+                    background: none;
+                }
+                QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+                    background: #f0f0f0;
+                    border-radius: 6px;
+                }
+            """)
+
+            # 创建协议文本标签
             label = QLabel(agreement_text)
             label.setAlignment(Qt.AlignmentFlag.AlignTop)
             label.setWordWrap(True)
             label.setStyleSheet("color: black; font-size: 16px;")
             label.setFont(QFont("Microsoft YaHei", 12))
-            self.tab_widget.addTab(label, tab_label)
+
+            # 将标签添加到滚动区域中
+            scroll_area.setWidget(label)
+            self.tab_widget.addTab(scroll_area, tab_label)
 
     def init_countdown(self, duration):
         self.countdown = duration

@@ -11,7 +11,7 @@ if 'External' in Now_Path.parts:
 ico_path = Now_Path / 'ico' / '封面ASX.png'
 Python_Installer_Path = Now_Path / 'Drivers' / 'Python_3.11.9.exe'
 Env_7zip_path = Now_Path / 'Env_Programs' / '7za.exe'
-Agreement_Path_Open_Source = Now_Path / 'Agreement'
-Agreement_Path_User = 
+Agreement_Path_Open_Source = Now_Path / 'Agreements' / 'AGPLv3.txt'
+Agreement_Path_User = Now_Path / 'Agreements' / 'XDFBoom_Software.txt'
 
 mtk_path = Path("C:/N1/Toolkit/tools/mtk")
