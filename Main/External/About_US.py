@@ -1,55 +1,125 @@
-from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QLabel
+from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QWidget, QHBoxLayout, QCheckBox, QFrame
 from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
-from .Path_Dict import ico_path  # 假设 ico_path 是图片路径
+from .Path_Dict import ico_path
 import sys
 
-class QLabelDemo(QMainWindow):
-    """标签示例"""
-    def __init__(self) -> None:
-        """构造函数"""
-        super().__init__()  # 调用父类初始化函数
-        self.init_ui()  # 初始化界面
+class AboutUsWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("关于我们 | About Us")
+        self.resize(640, 600)
+        self.init_ui()
 
     def init_ui(self):
-        """初始化UI界面"""
-        self.setWindowTitle("关于我们 | About us")  # 设置标题
-        self.resize(640, 480)  # 设置窗体尺寸
+        # 创建主窗口部件和布局
+        self.main_widget = QWidget()
+        self.setCentralWidget(self.main_widget)
+        self.main_layout = QVBoxLayout(self.main_widget)
+        self.main_layout.setContentsMargins(20, 20, 20, 20)  # 设置主窗口边距
 
-        # 创建主控件和布局
-        self.mainwidget = QWidget()
-        self.vblayout_main = QVBoxLayout()
-        self.vblayout_main.setAlignment(Qt.AlignmentFlag.AlignCenter)  # 设置居中对齐
-        self.mainwidget.setLayout(self.vblayout_main)
-        self.setCentralWidget(self.mainwidget)
-
-        # 读取 README.md 文件内容
-        try:
-            with open("README.md", "r", encoding="utf-8") as file:
-                readme_content = file.read()
-        except FileNotFoundError:
-            readme_content = "<p>README.md 文件未找到。</p>"
-
-        # 富文本标签
-        self.label_richtext = QLabel(self)
-        self.label_richtext.setText(f'<p>{readme_content}</p>')  # 设置 README 内容为标签文本
-        self.label_richtext.setOpenExternalLinks(True)  # 允许点击富文本中的链接
-
-        # 将富文本标签添加到布局中
-        self.vblayout_main.addWidget(self.label_richtext)
-
-        # 图片标签
+        # 标题图片
         self.label_image = QLabel(self)
-        pixmap = QPixmap(ico_path)  # 假设 ico_path 是您的图片路径
-        self.label_image.setPixmap(pixmap.scaled(200, 200, Qt.AspectRatioMode.KeepAspectRatio))  # 设置图片大小并保持长宽比
-        self.vblayout_main.addWidget(self.label_image)
+        pixmap = QPixmap(ico_path)  # 替换为您的图片路径
+        self.label_image.setPixmap(pixmap.scaled(120, 120, Qt.AspectRatioMode.KeepAspectRatio))
+        self.label_image.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.main_layout.addWidget(self.label_image)
 
-        # 设置窗口图标（如果有图标路径）
-        self.setWindowIcon(QPixmap(ico_path))
+        # 主标题
+        title_label = QLabel("XDFBoom Toolkit")
+        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        title_label.setStyleSheet("font-size: 26px; font-weight: bold; color: #333;")
+        self.main_layout.addWidget(title_label)
 
-# 应用程序入口
+        # 添加分隔线
+        self.add_separator()
+
+        # 信息部分
+        info_section = QLabel(
+            '<p style="color: #FF8C00; font-weight: bold;">⚠️ Warning</p>'
+            '<p style="margin-left: 10px;">如果您的程序出现了类似闪退的情况，请发送issue</p>'
+            '<p style="color: #32CD32; font-weight: bold;">💡 Tip</p>'
+            '<p style="margin-left: 10px;">提示：打包请使用Auto-py-to-exe</p>'
+            '<p style="color: #6A5ACD; font-weight: bold;">⚠️ Important</p>'
+            '<p style="margin-left: 10px;">最低系统要求：Windows 10 x64</p>'
+        )
+        info_section.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        info_section.setWordWrap(True)
+        info_section.setStyleSheet("font-size: 14px;")
+        self.main_layout.addWidget(info_section)
+
+        # 添加分隔线
+        self.add_separator()
+
+        # 使用方式
+        usage_label = QLabel("使用方式")
+        usage_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        usage_label.setStyleSheet("font-size: 18px; font-weight: bold; margin-top: 10px;")
+        self.main_layout.addWidget(usage_label)
+
+        usage_content = QLabel("开袋即食")
+        usage_content.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        usage_content.setStyleSheet("font-size: 14px; color: #555; margin-left: 10px;")
+        self.main_layout.addWidget(usage_content)
+
+        # 添加分隔线
+        self.add_separator()
+
+        # TODO列表
+        todo_label = QLabel("WILLTODO")
+        todo_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        todo_label.setStyleSheet("font-size: 18px; font-weight: bold; margin-top: 10px;")
+        self.main_layout.addWidget(todo_label)
+
+        # 任务列表布局
+        todo_layout = QVBoxLayout()
+        todo_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+
+        checkbox1 = QCheckBox("编写GUI完全界面")
+        checkbox2 = QCheckBox("更严酷的调试和过滤机制")
+        checkbox3 = QCheckBox("✅ 底层重写")  # 使用 Emoji 来展示已完成的任务
+
+        checkbox1.setStyleSheet("font-size: 14px; color: #555;")
+        checkbox2.setStyleSheet("font-size: 14px; color: #555;")
+        checkbox3.setStyleSheet("font-size: 14px; color: #555;")
+
+        todo_layout.addWidget(checkbox1)
+        todo_layout.addWidget(checkbox2)
+        todo_layout.addWidget(checkbox3)
+        self.main_layout.addLayout(todo_layout)
+
+        # 添加分隔线
+        self.add_separator()
+
+        # 下载链接
+        download_label = QLabel("下载链接")
+        download_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        download_label.setStyleSheet("font-size: 18px; font-weight: bold; margin-top: 10px;")
+        self.main_layout.addWidget(download_label)
+
+        link_label = QLabel(
+            '<a href="https://github.com/Folralorwns/XDFBoom_Toolkit" style="color: #1E90FF; text-decoration: none;">开源界面</a> | '
+            '<a href="https://blog.xdfboom.com" style="color: #1E90FF; text-decoration: none;">XDFBoom小站发布地址</a>'
+        )
+        link_label.setOpenExternalLinks(True)
+        link_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        link_label.setStyleSheet("font-size: 14px; margin-left: 10px;")
+        self.main_layout.addWidget(link_label)
+
+        # 添加底部空白以增加美观
+        self.main_layout.addStretch()
+
+    def add_separator(self):
+        """添加一个分隔线"""
+        line = QFrame()
+        line.setFrameShape(QFrame.Shape.HLine)
+        line.setFrameShadow(QFrame.Shadow.Sunken)
+        line.setStyleSheet("color: #CCCCCC; margin: 15px 0;")
+        self.main_layout.addWidget(line)
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = QLabelDemo()
+    window = AboutUsWindow()
     window.show()
     sys.exit(app.exec())
