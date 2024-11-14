@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QLabel
 from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
-from .Path_Dict import ico_path
+from .Path_Dict import ico_path  # 假设 ico_path 是图片路径
 import sys
 
 class QLabelDemo(QMainWindow):
@@ -23,50 +23,31 @@ class QLabelDemo(QMainWindow):
         self.mainwidget.setLayout(self.vblayout_main)
         self.setCentralWidget(self.mainwidget)
 
+        # 读取 README.md 文件内容
+        try:
+            with open("README.md", "r", encoding="utf-8") as file:
+                readme_content = file.read()
+        except FileNotFoundError:
+            readme_content = "<p>README.md 文件未找到。</p>"
+
         # 富文本标签
         self.label_richtext = QLabel(self)
-        self.label_richtext.setText(
-            '<a style="font-family: Sans Serif; color: #0000EE; font-size: 15pt; text-decoration: none" '
-            'href="https://blog.xdfboom.com/about">关于我们 | About us</a>'
-        )
-        self.label_richtext.setOpenExternalLinks(True)
-        self.label_richtext.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.label_richtext.setText(f'<p>{readme_content}</p>')  # 设置 README 内容为标签文本
+        self.label_richtext.setOpenExternalLinks(True)  # 允许点击富文本中的链接
+
+        # 将富文本标签添加到布局中
         self.vblayout_main.addWidget(self.label_richtext)
 
         # 图片标签
         self.label_image = QLabel(self)
-        self.label_image.setPixmap(QPixmap(ico_path))
-        self.label_image.setIndent(100)
-        self.label_image.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        self.label_image.setToolTip("我们的logo")
-        # 关联鼠标滑过和点击事件
-        self.label_image.linkHovered.connect(self.link_hovered)
-        self.label_image.linkActivated.connect(self.link_action)
+        pixmap = QPixmap(ico_path)  # 假设 ico_path 是您的图片路径
+        self.label_image.setPixmap(pixmap.scaled(200, 200, Qt.AspectRatioMode.KeepAspectRatio))  # 设置图片大小并保持长宽比
         self.vblayout_main.addWidget(self.label_image)
 
-        # 纯文本标签
-        self.label_plaintext = QLabel(self)
-        self.label_plaintext.setText(
-            "本团队由 @folralorwns 于 2023 年 / 1 月 / 12 日正式创建，主要成员有\n"
-            "服务器提供者：土拨鼠(file/file2)，yeenjie(blog)\n"
-            "网站技术及域名提供者：yeenjie\n"
-            "工具包以及教程编写者：folralorwns\n"
-            "“XDFBoom Team”或“XDFBoom团队”及其工具包与 新东方教育科技集团有限公司 没有任何关系！\n"
-            "XDFBoom Team | XDFBoom 团队©所有"
-        )
-        self.label_plaintext.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        self.label_plaintext.setWordWrap(True)  # 允许换行
-        self.label_plaintext.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
-        self.vblayout_main.addWidget(self.label_plaintext)
+        # 设置窗口图标（如果有图标路径）
+        self.setWindowIcon(QPixmap(ico_path))
 
-    def link_hovered(self, link):
-        """链接被鼠标悬停时的处理"""
-        print(f"Link hovered: {link}")
-
-    def link_action(self, link):
-        """链接被点击时的处理"""
-        print(f"Link activated: {link}")
-
+# 应用程序入口
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = QLabelDemo()
