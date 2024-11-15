@@ -116,10 +116,11 @@ class AboutUsWindow(QMainWindow):
         line.setFrameShadow(QFrame.Shadow.Sunken)
         line.setStyleSheet("color: #CCCCCC; margin: 15px 0;")
         self.main_layout.addWidget(line)
-
-
-if __name__ == "__main__":
+def main():
     app = QApplication(sys.argv)
     window = AboutUsWindow()
     window.show()
-    sys.exit(app.exec())
+    app.exec()
+
+def About_US():
+    main()
