@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QWidget, QHBoxLayout, QCheckBox, QFrame
 from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
-from .Path_Dict import ico_path
+from Path_Dict import ico_path
 import sys
 
 class AboutUsWindow(QMainWindow):
@@ -76,8 +76,16 @@ class AboutUsWindow(QMainWindow):
         todo_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
         checkbox1 = QCheckBox("编写GUI完全界面")
+        checkbox1.setChecked(False)
+        checkbox1.setDisabled(True)
+
         checkbox2 = QCheckBox("更严酷的调试和过滤机制")
-        checkbox3 = QCheckBox("✅ 底层重写")  # 使用 Emoji 来展示已完成的任务
+        checkbox2.setChecked(False)
+        checkbox2.setDisabled(True)
+        
+        checkbox3 = QCheckBox("底层重写")  # 使用 Emoji 来展示已完成的任务
+        checkbox3.setChecked(True) 
+        checkbox3.setDisabled(True) 
 
         checkbox1.setStyleSheet("font-size: 14px; color: #555;")
         checkbox2.setStyleSheet("font-size: 14px; color: #555;")
@@ -124,3 +132,4 @@ def main():
 
 def About_US():
     main()
+About_US()
