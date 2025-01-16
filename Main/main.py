@@ -7,7 +7,7 @@ from External.env_ver_checker import checker,workmode
 from External.ROM_Dowload_Link import *
 from External.Android_Debug_Bridge import flash_dir,adb,adb_shell,adb_connection_check,fastboot,fastboot_connection_check
 from External.Dowloader import Down_and_Dec
-from Main.External.Path_Dict import Now_Path
+from External.Path_Dict import Now_Path
 from External.Security_Agreement import agreement_check
 from External.Screen_Clear import prepare_screen
 os.system('@echo off')
