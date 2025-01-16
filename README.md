@@ -1,12 +1,7 @@
 <div align="center">
 <a><img src="./Main/ico/boomlogo-words.png" width="800" height="200" alt="XDFBoom Toolkit"></a>
-</div>
 
-<div align="center">
-
-
-# XDFBoom Toolkit
-
+# XDFBoom Toolkit Open Source Project
 </div>
 
 > [!WARNING]
@@ -30,5 +25,9 @@
       
 ## 下载链接
 > 最新版下载地址：[Github下载](https://github.com/Folralorwns/XDFBoom_Toolkit/releases)
-> 
+>
 > XDFBoom小站发布地址：[GO！](https://blog.xdfboom.com)
+<div align="center">
+
+## Copyright © 2023 - 2025 XDFBoom Team, All Rights Reserved
+</div>
