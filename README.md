@@ -4,6 +4,7 @@
 
 <div align="center">
 
+
 # XDFBoom Toolkit
 
 </div>
@@ -24,9 +25,10 @@
 ## WILLTODO
 - [ ] 编写GUI完全界面
 - [ ] 更严格的刷机验证机制
+- [ ] 支持V1.3.0及其以上版本
 - [√] 底层重写
       
 ## 下载链接
-> 最新版下载地址：[云盘下载](https://file2.xdfboom.com)
+> 最新版下载地址：[Github下载](https://github.com/Folralorwns/XDFBoom_Toolkit/releases)
 > 
 > XDFBoom小站发布地址：[GO！](https://blog.xdfboom.com)
