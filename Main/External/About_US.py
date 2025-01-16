@@ -83,7 +83,7 @@ class AboutUsWindow(QMainWindow):
         checkbox2.setChecked(False)
         checkbox2.setDisabled(True)
         
-        checkbox3 = QCheckBox("底层重写")  # 使用 Emoji 来展示已完成的任务
+        checkbox3 = QCheckBox("底层重写")
         checkbox3.setChecked(True) 
         checkbox3.setDisabled(True) 
 
