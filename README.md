@@ -1,5 +1,5 @@
 <div align="center">
-<a><img src="./Main/ico/封面.png" width="400" height="300" alt="XDFBoom Toolkit"></a>
+<a><img src="./Main/ico/boomlogo-words.png" width="800" height="200" alt="XDFBoom Toolkit"></a>
 </div>
 
 <div align="center">
@@ -12,7 +12,7 @@
 > 如果您的程序出现了类似闪退等情况，请发送issue
 
 > [!TIP]
-> 提示：打包请使用auto-py-to-exe
+> 提示：打包请使用auto-py-to-exe|PyInstaller
 
 > [!IMPORTANT]  
 > 最低系统要求：Windows 10 x64

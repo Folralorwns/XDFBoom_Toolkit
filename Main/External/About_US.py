@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QWidget, QHBoxLayout, QCheckBox, QFrame
 from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
-from Path_Dict import ico_path
+from .Path_Dict import ico_path
 import sys
 
 class AboutUsWindow(QMainWindow):
@@ -132,4 +132,3 @@ def main():
 
 def About_US():
     main()
-About_US()

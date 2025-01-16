@@ -9,7 +9,7 @@ def adb(config):
     subprocess.run(adbuse, shell=True)
 
 def adb_shell(config):
-    adbshell = os.path.join(flash_dir, 'adb shell ' + config)
+    adbshell = os.path.join(flash_dir, 'adb.exe shell ' + config)
     subprocess.run(adbshell, shell=True)
 
 def adb_connection_check():
