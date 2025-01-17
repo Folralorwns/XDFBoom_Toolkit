@@ -3,7 +3,7 @@ import os
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, QMessageBox, QTabBar, QScrollArea, QStackedWidget
 from PySide6.QtCore import Qt, QPoint, QPropertyAnimation
 from PySide6.QtGui import QFont, QIcon
-from .Path_Dict import ico_path,Agreement_Path_User,Agreement_Path_Open_Source
+from .Path_Dict import ico_light_theme,Agreement_Path_User,Agreement_Path_Open_Source
 
 # 定义版本号和工具包版本
 MAIN_VERSION = "V6.0.5"
@@ -21,7 +21,7 @@ class AgreementWindow(QWidget):
         self.setFixedSize(720, 700)
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         self.setStyleSheet("background-color: white;")
-        self.setWindowIcon(QIcon(str(ico_path)))  # 确保路径是字符串类型
+        self.setWindowIcon(QIcon(str(ico_light_theme)))  # 确保路径是字符串类型
 
         # 创建 QTabBar 和 QStackedWidget
         self.tab_bar = QTabBar(self)
