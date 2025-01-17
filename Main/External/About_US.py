@@ -1,7 +1,7 @@
-from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QWidget, QHBoxLayout, QCheckBox, QFrame
-from PySide6.QtGui import QPixmap
-from PySide6.QtCore import Qt
-from .Path_Dict import ico_path
+from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QWidget, QCheckBox, QFrame, QPushButton
+from PySide6.QtGui import QPixmap, QColor, QIcon
+from PySide6.QtCore import Qt, QPropertyAnimation, QRect, QEasingCurve
+from Path_Dict import ico_light_theme,ico_dark_theme
 import sys
 
 class AboutUsWindow(QMainWindow):
@@ -9,6 +9,7 @@ class AboutUsWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("关于我们 | About Us")
         self.resize(640, 600)
+        self.is_light_mode = True  # 默认是明亮模式
         self.init_ui()
 
     def init_ui(self):
@@ -20,16 +21,15 @@ class AboutUsWindow(QMainWindow):
 
         # 标题图片
         self.label_image = QLabel(self)
-        pixmap = QPixmap(ico_path)  # 替换为您的图片路径
-        self.label_image.setPixmap(pixmap.scaled(120, 120, Qt.AspectRatioMode.KeepAspectRatio))
+        self.change_image()  # 根据当前模式切换图片
         self.label_image.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.main_layout.addWidget(self.label_image)
 
         # 主标题
-        title_label = QLabel("XDFBoom Toolkit")
-        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        title_label.setStyleSheet("font-size: 26px; font-weight: bold; color: #333;")
-        self.main_layout.addWidget(title_label)
+        self.title_label = QLabel("XDFBoom Toolkit Open Source Project")
+        self.title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.title_label.setStyleSheet("font-size: 26px; font-weight: bold; color: #333;")
+        self.main_layout.addWidget(self.title_label)
 
         # 添加分隔线
         self.add_separator()
@@ -114,8 +114,125 @@ class AboutUsWindow(QMainWindow):
         link_label.setStyleSheet("font-size: 14px; margin-left: 10px;")
         self.main_layout.addWidget(link_label)
 
+        # 亮度切换按钮（左侧或右侧的小按钮）
+        self.brightness_button = QPushButton("🌞")
+        self.brightness_button.setStyleSheet("""
+            background-color: transparent;
+            font-size: 24px;
+            border: none;
+            padding: 5px;
+        """)
+        self.brightness_button.clicked.connect(self.toggle_theme)
+        self.main_layout.addWidget(self.brightness_button, alignment=Qt.AlignmentFlag.AlignRight)  # 将按钮放置在右侧
+
+        # 退出按钮（小按钮，右下角）
+        self.exit_button = QPushButton("退出")
+        self.exit_button.setStyleSheet("""
+            background-color: #1E90FF;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 10px;
+            padding: 5px 10px;
+        """)
+        self.exit_button.clicked.connect(self.close)
+
+        # 设置初始位置为窗口底部外部
+        self.exit_button_animation = QPropertyAnimation(self.exit_button, b"geometry")
+        self.exit_button_animation.setEasingCurve(QEasingCurve.InOutQuad)
+        self.exit_button_animation.setDuration(1000)
+        
+        # 动画初始位置在窗口外面
+        self.exit_button_animation.setStartValue(QRect(0, self.height(), 180, 50))
+        
+        # 启动按钮动画
+        self.start_exit_button_animation()
+
+        # 添加退出按钮到布局
+        self.main_layout.addWidget(self.exit_button)
+
         # 添加底部空白以增加美观
         self.main_layout.addStretch()
+
+        # 初始化背景色和文字颜色动画
+        self.bg_animation = QPropertyAnimation(self.main_widget, b"styleSheet")
+        self.bg_animation.setDuration(2000)
+        self.bg_animation.setEasingCurve(QEasingCurve.InOutQuad)
+
+        # 设置初始的背景样式为明亮
+        self.apply_light_theme()
+
+    def start_exit_button_animation(self):
+        """ 在原位置基础上移动到窗口底部 """
+        window_height = self.height()
+
+        # 计算目标位置
+        button_width = 180
+        button_height = 50
+        x_position = (self.width() - button_width) // 2  # 水平居中
+        y_position = window_height - button_height - 20  # 距离底部20像素
+
+        # 更新目标位置
+        self.exit_button_animation.setEndValue(QRect(x_position, y_position, button_width, button_height))
+
+        # 启动动画
+        self.exit_button_animation.start()
+
+    def resizeEvent(self, event):
+        """ 在窗口尺寸变化时，保持按钮在底部，动画会在原位置基础上移动 """
+        super().resizeEvent(event)  # 调用基类的resizeEvent方法
+        self.start_exit_button_animation()  # 在窗口尺寸变化时启动动画
+
+    def toggle_theme(self):
+        """ 切换明亮和暗色主题 """
+        if self.is_light_mode:
+            self.apply_dark_theme()
+        else:
+            self.apply_light_theme()
+        self.is_light_mode = not self.is_light_mode
+
+    def apply_light_theme(self):
+        """ 应用明亮主题 """
+        # 明亮模式背景色和文字颜色
+        self.bg_animation.setStartValue("background-color: #FFFFFF; color: #333;")
+        self.bg_animation.setEndValue("background-color: #FFFFFF; color: #333;")
+        self.bg_animation.start()
+
+        self.title_label.setStyleSheet("font-size: 26px; font-weight: bold; color: #333;")
+        self.brightness_button.setStyleSheet("""
+            background-color: transparent;
+            font-size: 24px;
+            border: none;
+            padding: 5px;
+        """)
+
+        self.change_image()
+
+    def apply_dark_theme(self):
+        """ 应用暗色主题 """
+        # 暗色模式背景色和文字颜色
+        self.bg_animation.setStartValue("background-color: #333333; color: #FFFFFF;")
+        self.bg_animation.setEndValue("background-color: #333333; color: #FFFFFF;")
+        self.bg_animation.start()
+
+        self.title_label.setStyleSheet("font-size: 26px; font-weight: bold; color: #FFFFFF;")
+        self.brightness_button.setStyleSheet("""
+            background-color: transparent;
+            font-size: 24px;
+            border: none;
+            padding: 5px;
+        """)
+
+        self.change_image()
+
+    def change_image(self):
+        """ 根据当前主题变化图片 """
+        if self.is_light_mode:
+            pixmap = QPixmap(ico_light_theme)  # 这里使用你自己的图片路径
+        else:
+            pixmap = QPixmap(ico_dark_theme)  # 暗色主题的图片路径
+
+        self.label_image.setPixmap(pixmap.scaled(800, 200, Qt.AspectRatioMode.KeepAspectRatio))
 
     def add_separator(self):
         """添加一个分隔线"""
@@ -124,6 +241,7 @@ class AboutUsWindow(QMainWindow):
         line.setFrameShadow(QFrame.Shadow.Sunken)
         line.setStyleSheet("color: #CCCCCC; margin: 15px 0;")
         self.main_layout.addWidget(line)
+
 def main():
     app = QApplication(sys.argv)
     window = AboutUsWindow()
@@ -132,3 +250,5 @@ def main():
 
 def About_US():
     main()
+
+About_US()
