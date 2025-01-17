@@ -1,5 +1,5 @@
 <div align="center">
-<a><img src="./Main/ico/boomlogo-words.png" width="800" height="200" alt="XDFBoom Toolkit"></a>
+<a><img src="./logo_light_theme.png" width="800" height="200" alt="XDFBoom Toolkit Open Source Project"></a>
 
 # XDFBoom Toolkit Open Source Project
 </div>
