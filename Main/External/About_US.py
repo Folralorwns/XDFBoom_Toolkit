@@ -38,7 +38,7 @@ class AboutUsWindow(QMainWindow):
         # 信息部分
         info_section = QLabel(
             '<p style="color: #FF8C00; font-weight: bold;">⚠️ Warning</p>'
-            '<p style="margin-left: 10px;">如果您的程序出现了类似闪退的情况，请发送issue</p>'
+            '<p style="margin-left: 10px;">如果您的程序出现了类似闪退的情况，请发送issue<br>此程序暂时不支持V1.2.7及其以上版本的学习机</p>'
             '<p style="color: #32CD32; font-weight: bold;">💡 Tip</p>'
             '<p style="margin-left: 10px;">提示：打包请使用Auto-py-to-exe</p>'
             '<p style="color: #6A5ACD; font-weight: bold;">⚠️ Important</p>'
@@ -80,12 +80,12 @@ class AboutUsWindow(QMainWindow):
         checkbox1.setChecked(False)
         checkbox1.setDisabled(True)
 
-        checkbox2 = QCheckBox("更严酷的调试和过滤机制")
+        checkbox2 = QCheckBox("更严格的日志分析")
         checkbox2.setChecked(False)
         checkbox2.setDisabled(True)
         
-        checkbox3 = QCheckBox("底层重写")
-        checkbox3.setChecked(True) 
+        checkbox3 = QCheckBox("适配V1.2.7及其以上版本")
+        checkbox3.setChecked(False) 
         checkbox3.setDisabled(True) 
 
         checkbox1.setStyleSheet("font-size: 14px; color: #555;")

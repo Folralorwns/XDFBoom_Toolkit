@@ -79,9 +79,7 @@ def checker(config):
             time.sleep(1)
             # 进行系统重启
             subprocess.run(['shutdown', '-r', '-t', '3'], check=True)
-    
-    elif config == 4:
-        exit()
+            exit()
 
 """1：系统版本检测"""
 """2：目录检测"""
