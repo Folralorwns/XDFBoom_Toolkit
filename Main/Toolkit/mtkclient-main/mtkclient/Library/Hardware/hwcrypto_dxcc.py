@@ -1128,7 +1128,7 @@ class Dxcc(metaclass=LogBase):
         keylength = 0x10
         self.tzcc_clk(1)
         dstaddr = self.da_payload_addr - 0x300
-        pubkey = self.sasi_bsv_pubkey_hash_get(SASI_SB_HASH_BOOT_KEY_256B)
+        pubkey = self.sasi_bsv_pub_key_hash_get(SASI_SB_HASH_BOOT_KEY_256B)
         derivedkey = self.sbrom_key_derivation(1, key, salt, keylength, dstaddr)
         hash = hashlib.sha256(pubkey+derivedkey).digest()
         self.tzcc_clk(0)

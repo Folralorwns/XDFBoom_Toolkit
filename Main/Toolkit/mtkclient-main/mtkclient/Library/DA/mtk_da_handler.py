@@ -240,7 +240,7 @@ class DaHandler(metaclass=LogBase):
                                            length=rpartition.sectors * self.config.pagesize,
                                            filename="", parttype=parttype)
             return data
-        return None
+        return b""
 
     def da_write_partition(self, partitionname, data:bytes=None, parttype="user"):
         rpartition = None
@@ -677,6 +677,8 @@ class DaHandler(metaclass=LogBase):
             tmp = self.da_read_partition("para")
         if tmp != b"":
             slot = tmp[0x800:0x802].decode('utf-8')
+            if slot == "\x00\x00":
+                slot = ""
         else:
             slot = ""
         return slot

@@ -52,19 +52,20 @@ class SecCfgV4(metaclass=LogBase):
         if _hash == dec_hash:
             self.hwtype = "SW"
         else:
-            dec_hash = self.hwc.sej.sej_sec_cfg_hw(self.hash, False)
+            dec_hash = self.hwc.sej.sej_sec_cfg_hw_V3(self.hash, False)
             if _hash == dec_hash:
-                self.hwtype = "V2"
+                self.hwtype = "V3"
             else:
-                dec_hash = self.hwc.sej.sej_sec_cfg_hw_V3(self.hash, False)
+                dec_hash = self.hwc.sej.sej_sec_cfg_hw_V3(self.hash, False, legacy=True)
                 if _hash == dec_hash:
-                    self.hwtype = "V3"
+                    self.hwtype = "V4"
                 else:
-                    dec_hash = self.hwc.sej.sej_sec_cfg_hw_V3(self.hash, False, legacy=True)
+                    dec_hash = self.hwc.sej.sej_sec_cfg_hw(self.hash, False)
                     if _hash == dec_hash:
-                        self.hwtype = "V4"
+                        self.hwtype = "V2"
                     else:
                         return False
+        self.info(f"hwtype found: {self.hwtype}")
 
         """
         LKS_DEFAULT = 0x01
