@@ -7,8 +7,6 @@
 > [!WARNING]
 > 如果您的程序出现了类似闪退等情况，请发送issue
 > 
-> 本程序暂不支持V1.2.7及其以上学习机版本！
-
 > [!TIP]
 > 提示：打包请使用auto-py-to-exe|PyInstaller
 
@@ -22,7 +20,7 @@
 ## WILLTODO
 - [ ] 编写GUI完全界面
 - [ ] 更严格的刷机验证机制
-- [ ] 支持V1.2.7及其以上版本
+- [√] 支持V1.2.7及其以上版本
 
 ## 下载链接
 > 最新版下载地址：[Github下载](https://github.com/Folralorwns/XDFBoom_Toolkit/releases)
