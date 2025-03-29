@@ -8,7 +8,7 @@
 > 如果您的程序出现了类似闪退等情况，请发送issue
 > 本项目基于 GNU Affero General Public License v3（AGPLv3）开源。
 > 本项目部分代码来自 MTKClient（GPLv3），并已在 AGPLv3 条款下进行适配。
-> 
+
 > [!TIP]
 > 提示：打包请使用auto-py-to-exe|PyInstaller
 
