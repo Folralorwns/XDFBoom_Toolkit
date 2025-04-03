@@ -27,4 +27,4 @@ def show_update_popup(parent=None):
         if reply == QMessageBox.Yes:
             QDesktopServices.openUrl(QUrl(download_url))
     else:
-        QMessageBox.information(parent, "无更新", "您已经是最新版本啦～")
+        QMessageBox.information(parent, "无更新", "您已经是最新版本了喵～")

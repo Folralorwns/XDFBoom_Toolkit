@@ -6,8 +6,8 @@ class WorkMode(Enum):
     完整模式 = "完整模式"
 
 # 当前工具版本
-MAIN_VERSION = "V6.0.5"
-TOOLKIT_VERSION = "V6.0.5"
+MAIN_VERSION = "V7.0.0"
+TOOLKIT_VERSION = "V7.0.0"
 
 # 日志目录
 LOG_PATH = Path("C:/N1/Logs")

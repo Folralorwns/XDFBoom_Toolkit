@@ -26,7 +26,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("XDFBoom Toolkit 平台工具箱")
         self.resize(960, 640)
-        self.setWindowIcon(QIcon(get_icon_path("light")))
+        self.setWindowIcon(QIcon(str(get_icon_path("light"))))
         self.init_ui()
         show_update_popup(self)
 
