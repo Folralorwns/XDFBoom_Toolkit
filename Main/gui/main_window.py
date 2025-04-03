@@ -10,6 +10,8 @@ from .about_us import AboutUsWindow
 from core.path_manager import get_icon_path
 from gui.update_popup import show_update_popup
 from gui.agreement_window import AgreementWindow
+from gui.mtk_flash_page import MTKFlashPage
+
 
 # 占位页面（后续功能会替换这些）
 class PlaceholderPage(QWidget):
@@ -43,7 +45,7 @@ class MainWindow(QMainWindow):
 
         # 页面容器
         self.pages = QStackedWidget()
-        self.pages.addWidget(FastbootPage())
+        self.pages.addWidget(MTKFlashPage())
         self.pages.addWidget(NetworkFixPage())
         self.pages.addWidget(AboutUsWindow(embed=True))
         self.pages.addWidget(AgreementWindow(embed=True))

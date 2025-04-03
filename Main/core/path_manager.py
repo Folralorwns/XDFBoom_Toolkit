@@ -34,5 +34,8 @@ SEVEN_ZIP_PATH = RES / "Env_Programs" / "7za.exe"
 # Markdown
 MARKDOWN_PATH = RES / "Markdown" / "README.md"
 
-# 外部脚本路径
-mtk_script_path = Path("C:/N1/Toolkit/tools/mtk.py")  # 固定刷机路径
+#MTKClient
+MTKCLIENT_DIR = RES / "Toolkit" / "mtkclient-main"
+MTK_SCRIPT_PATH = MTKCLIENT_DIR / "mtk.py"
+MTK_EXAMPLES_DIR = MTKCLIENT_DIR / "examples"
+
