@@ -2,7 +2,7 @@ from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QMessag
 from PySide6.QtCore import Qt
 import os
 from core.adb_manager import fastboot_connection_check
-from core.path_manager import mtk_script_path
+from core.path_manager import MTK_SCRIPT_PATH
 
 class FastbootPage(QWidget):
     def __init__(self):
@@ -33,7 +33,7 @@ class FastbootPage(QWidget):
         QMessageBox.information(self, "执行中", "准备进入 fastboot...")
         fastboot_connection_check()
         try:
-            os.system(f'python {mtk_script_path} script C:/N1/Toolkit/tools/run.example')
+            os.system(f'python {MTK_SCRIPT_PATH} script C:/N1/Toolkit/tools/run.example')
             QMessageBox.information(self, "刷机完成", "刷机结束，请立即拔线")
         except Exception as e:
             QMessageBox.critical(self, "刷机失败", str(e))

@@ -4,7 +4,7 @@ from PySide6.QtCore import QUrl
 from core.version_checker import fetch_update_info, compare_versions
 from config.global_state import TOOLKIT_VERSION
 
-UPDATE_CHECK_URL = "https://your-domain.com/version.json"  # ✅ 你上传 JSON 的位置
+UPDATE_CHECK_URL = "https://github.com/Folralorwns/XDFBoom_Toolkit/blob/main/version.json"  # ✅ 你上传 JSON 的位置
 
 def show_update_popup(parent=None):
     update_info = fetch_update_info(UPDATE_CHECK_URL)
