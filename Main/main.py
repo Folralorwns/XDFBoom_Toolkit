@@ -1,8 +1,8 @@
 import sys
 import os
-from PySide6.QtWidgets import QApplication
-from gui.main_window import MainWindow
+from gui.FluentMainWindow_v2 import FluentMainWindow
 from gui.agreement_window import AgreementWindow
+from PySide6.QtWidgets import QApplication
 from config.global_state import USER_AGREEMENT_LOG_PATH
 
 
@@ -19,12 +19,12 @@ def check_user_agreement():
 
 
 def main():
-    check_user_agreement()
-
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec())
+    if __name__ == "__main__":
+        import sys
+        app = QApplication(sys.argv)
+        window = FluentMainWindow()
+        window.show()
+        app.exec()
 
 
 if __name__ == '__main__':
