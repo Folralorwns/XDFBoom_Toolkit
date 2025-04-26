@@ -24,7 +24,7 @@ def main():
     if __name__ == "__main__":
         import sys
         app = QApplication(sys.argv)
-        window = FluentMainWindow()
+        window = FluentWindow()
         window.show()
         app.exec()
 

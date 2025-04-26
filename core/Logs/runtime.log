@@ -1,0 +1,14 @@
+[2025-04-26 16:19:46] [INFO] 启动程序
+[2025-04-26 16:19:46] [ERROR] Uncaught exception
+Traceback (most recent call last):
+  File "d:\Folra程序\新东方N1\XDFBoom_Toolkit\Main\main.py", line 33, in <module>
+    main()
+  File "d:\Folra程序\新东方N1\XDFBoom_Toolkit\Main\main.py", line 27, in main
+    window = FluentMainWindow()
+             ^^^^^^^^^^^^^^^^^^
+  File "d:\Folra程序\新东方N1\XDFBoom_Toolkit\Main\gui\FluentMainWindow_v2.py", line 27, in __init__
+    self.nav_interface = NavigationInterface(self, showMenuButton=True)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\site-packages\qfluentwidgets\components\navigation\navigation_interface.py", line 35, in __init__
+    super().__init__(parent=parent)
+TypeError: QWidget(parent: Optional[QWidget] = None, flags: Union[Qt.WindowFlags, Qt.WindowType] = Qt.WindowFlags()): argument 'parent' has unexpected type 'FluentMainWindow'
