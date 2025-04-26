@@ -1,7 +1,7 @@
 import sys
 import os
 from gui.FluentMainWindow_v2 import FluentMainWindow
-from gui.agreement_window import AgreementWindow
+from gui.pages.agreement_window import AgreementWindow
 from PySide6.QtWidgets import QApplication
 from config.global_state import USER_AGREEMENT_LOG_PATH
 from core.logging_config import logger

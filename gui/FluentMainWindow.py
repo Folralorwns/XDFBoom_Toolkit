@@ -4,10 +4,10 @@ from qfluentwidgets import (
     FluentWindow, NavigationInterface, NavigationItemPosition,
     StrongBodyLabel, FluentIcon, AvatarWidget, setTheme, isDarkTheme, Theme
 )
-from gui.pages.home_page import HomePage
+from gui.pages.HomePage import HomePage
 from gui.pages.mtk_flash_page import MTKFlashPage
 from gui.pages.adb_page import ADBPage
-from gui.pages.settings_page import SettingsPage
+from gui.pages.SettingsPage import SettingsPage
 from core.logging_config import logger
 
 

@@ -49,8 +49,7 @@ class AboutUsPage(FluentWindow):
         tip_label = StrongBodyLabel("💡 Tip")
         important_label = StrongBodyLabel("⚠️ Important")
 
-        warning_content = SubtitleLabel("如果您的程序出现了类似闪退的情况，请发送issue
-此程序暂时不支持V1.2.7及其以上版本的学习机")
+        warning_content = SubtitleLabel("如果您的程序出现了类似闪退的情况，请发送issue\n此程序暂时不支持V1.2.7及其以上版本的学习机")
         tip_content = SubtitleLabel("提示：打包请使用Auto-py-to-exe")
         important_content = SubtitleLabel("最低系统要求：Windows 10 x64")
 
