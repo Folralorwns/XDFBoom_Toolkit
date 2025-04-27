@@ -1,5 +1,0 @@
-w vbmeta ./images/vbmeta_patched.img
-w logo ./images/XDF_N1.img
-w super ./images/super.img
-e userdata,metadata,cache
-reset
