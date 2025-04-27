@@ -1,7 +1,8 @@
 <div align="center">
-<a><img src="./logo_light_theme.png" width="800" height="200" alt="XDFBoom Toolkit Open Source Project"></a>
+<a><img src="./ico/logo_light_theme.png" width="800" height="200" alt="XDFBoom Toolkit Open Source Project"></a>
 
 # XDFBoom Toolkit Open Source Project
+# 目前作者正在进修(暂时把代码下了)
 </div>
 
 > [!WARNING]
