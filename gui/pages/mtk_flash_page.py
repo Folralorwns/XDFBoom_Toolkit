@@ -1,8 +1,6 @@
-
 from qfluentwidgets import (
     FluentWindow, CardWidget, ComboBox, PrimaryPushButton,
-    StrongBodyLabel, SubtitleLabel, TextEdit, TextBox,
-    SimpleListWidget, InfoBar, InfoBarPosition
+    SubtitleLabel, TextEdit, LineEdit,InfoBar, InfoBarPosition
 )
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget
 from logic.flash_tool import run_flash_script, run_custom_mtk_command
@@ -60,7 +58,7 @@ class MTKFlashPage(FluentWindow):
 
         # 自定义命令输入 + 执行按钮
         self.custom_layout = QHBoxLayout()
-        self.custom_command_box = TextBox(placeholderText="请输入简短MTK指令，如: e userdata")
+        self.custom_command_box = LineEdit(placeholderText="请输入简短MTK指令，如: e userdata")
         self.custom_run_btn = PrimaryPushButton("执行自定义命令")
         self.custom_run_btn.clicked.connect(self.run_custom_command)
 

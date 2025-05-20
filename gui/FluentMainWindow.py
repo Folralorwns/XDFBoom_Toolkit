@@ -1,8 +1,12 @@
-
 from PySide6.QtWidgets import QWidget, QStackedWidget, QVBoxLayout, QHBoxLayout
+from PySide6.QtCore import QSettings, QPropertyAnimation, QEasingCurve, Qt, QTimer
+from PySide6.QtGui import QCloseEvent
+import sys
+import traceback
 from qfluentwidgets import (
     FluentWindow, NavigationInterface, NavigationItemPosition,
-    StrongBodyLabel, FluentIcon, AvatarWidget, setTheme, isDarkTheme, Theme
+    StrongBodyLabel, FluentIcon, AvatarWidget, setTheme, isDarkTheme, Theme,
+    InfoBar, InfoBarPosition, MessageBox
 )
 from gui.pages.HomePage import HomePage
 from gui.pages.mtk_flash_page import MTKFlashPage
@@ -14,12 +18,58 @@ from core.logging_config import logger
 class FluentMainWindow(FluentWindow):
     def __init__(self):
         super().__init__()
+        # 设置全局异常处理
+        sys.excepthook = self.handle_exception
+        
         self.setWindowTitle("XDFBoom Toolkit")
         self.resize(1200, 800)
-
+        
+        # 初始化设置
+        self.settings = QSettings('XDFBoom', 'Toolkit')
         self.init_ui()
         self.init_navigation()
-        self.theme_switcher()  # 可选
+        self.load_theme()  # 加载保存的主题设置
+        
+        # 初始化导航栏动画
+        self.nav_animation = QPropertyAnimation(self.nav_interface, b"minimumWidth")
+        self.nav_animation.setDuration(200)
+        self.nav_animation.setEasingCurve(QEasingCurve.InOutQuad)
+        
+        # 初始化导航栏自动折叠计时器
+        self.collapse_timer = QTimer()
+        self.collapse_timer.setSingleShot(True)
+        self.collapse_timer.timeout.connect(self._auto_collapse_nav)
+
+    def handle_exception(self, exc_type, exc_value, exc_traceback):
+        """全局异常处理"""
+        error_msg = ''.join(traceback.format_exception(exc_type, exc_value, exc_traceback))
+        logger.error(f"发生未捕获的异常: {error_msg}")
+        
+        # 显示错误对话框
+        w = MessageBox(
+            '程序错误',
+            f'程序发生错误：\n{str(exc_value)}\n\n是否要查看详细错误信息？',
+            self
+        )
+        if w.exec():
+            # 显示详细错误信息
+            MessageBox(
+                '详细错误信息',
+                error_msg,
+                self
+            ).exec()
+
+    def closeEvent(self, event: QCloseEvent):
+        """关闭事件处理"""
+        w = MessageBox(
+            '确认退出',
+            '确定要退出程序吗？',
+            self
+        )
+        if w.exec():
+            event.accept()
+        else:
+            event.ignore()
 
     def init_ui(self):
         self.central_widget = QWidget(self)
@@ -110,23 +160,80 @@ class FluentMainWindow(FluentWindow):
 
         self.nav_interface.setCurrentItem('home')
 
-    def toggle_theme(self):
-        # 切换明暗模式
-        if isDarkTheme():
-            setTheme(Theme.LIGHT)
-        else:
+    def load_theme(self):
+        # 从设置中加载主题
+        theme = self.settings.value('theme', 'light')
+        if theme == 'dark':
             setTheme(Theme.DARK)
+        else:
+            setTheme(Theme.LIGHT)
+
+    def toggle_theme(self):
+        # 添加主题切换动画
+        animation = QPropertyAnimation(self, b"windowOpacity")
+        animation.setDuration(200)
+        animation.setEasingCurve(QEasingCurve.InOutQuad)
+        
+        if isDarkTheme():
+            animation.setStartValue(1.0)
+            animation.setEndValue(0.0)
+            animation.finished.connect(lambda: self._switch_to_light())
+        else:
+            animation.setStartValue(1.0)
+            animation.setEndValue(0.0)
+            animation.finished.connect(lambda: self._switch_to_dark())
+            
+        animation.start()
+
+    def _switch_to_light(self):
+        setTheme(Theme.LIGHT)
+        self.settings.setValue('theme', 'light')
+        self._show_theme_notification('已切换至浅色主题')
+
+    def _switch_to_dark(self):
+        setTheme(Theme.DARK)
+        self.settings.setValue('theme', 'dark')
+        self._show_theme_notification('已切换至深色主题')
+
+    def _show_theme_notification(self, message):
+        InfoBar.success(
+            title='主题切换',
+            content=message,
+            orient=Qt.Horizontal,
+            isClosable=True,
+            position=InfoBarPosition.TOP,
+            duration=2000,
+            parent=self
+        )
 
     def enterEvent(self, event):
         try:
             if not self.nav_interface.isExpanded():
-                self.nav_interface.expand()
+                self._expand_nav()
         except Exception as e:
             logger.error(f"导航展开异常: {e}")
 
     def leaveEvent(self, event):
         try:
             if self.nav_interface.isExpanded():
-                self.nav_interface.collapse()
+                self.collapse_timer.start(1000)  # 1秒后自动折叠
         except Exception as e:
             logger.error(f"导航收缩异常: {e}")
+
+    def _expand_nav(self):
+        """展开导航栏"""
+        self.collapse_timer.stop()
+        self.nav_animation.setStartValue(self.nav_interface.minimumWidth())
+        self.nav_animation.setEndValue(300)
+        self.nav_animation.start()
+        self.nav_interface.expand()
+
+    def _auto_collapse_nav(self):
+        """自动折叠导航栏"""
+        if not self.nav_interface.isExpanded():
+            return
+            
+        self.nav_animation.setStartValue(self.nav_interface.minimumWidth())
+        self.nav_animation.setEndValue(65)
+        self.nav_animation.start()
+        self.nav_interface.collapse()

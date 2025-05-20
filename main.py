@@ -1,6 +1,6 @@
 import sys
 import os
-from gui.FluentMainWindow_v2 import FluentMainWindow
+from gui.FluentMainWindow import FluentMainWindow
 from gui.pages.agreement_window import AgreementWindow
 from PySide6.QtWidgets import QApplication
 from config.global_state import USER_AGREEMENT_LOG_PATH
@@ -19,15 +19,13 @@ def check_user_agreement():
             print("用户未同意协议，程序退出。")
             sys.exit(0)
 
-
 def main():
-    if __name__ == "__main__":
-        import sys
-        app = QApplication(sys.argv)
-        window = FluentWindow()
-        window.show()
-        app.exec()
-
+    check_user_agreement()  # 检查用户协议
+    
+    app = QApplication(sys.argv)
+    window = FluentMainWindow()  # 使用正确的窗口类
+    window.show()
+    app.exec()
 
 if __name__ == '__main__':
     main()
