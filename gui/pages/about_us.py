@@ -1,11 +1,14 @@
+
 from qfluentwidgets import (
     FluentWindow, CardWidget, StrongBodyLabel, SubtitleLabel,
-    HyperlinkLabel
+    PrimaryPushButton, InfoBar, InfoBarPosition, HyperlinkLabel
 )
 from PySide6.QtWidgets import QVBoxLayout, QWidget, QLabel, QCheckBox, QFrame
 from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
 from core.path_manager import ico_light_theme
+import sys
+import webbrowser
 
 
 class AboutUsPage(FluentWindow):

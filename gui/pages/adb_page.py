@@ -1,7 +1,8 @@
 
 from qfluentwidgets import (
     FluentWindow, CardWidget, ComboBox, PrimaryPushButton,
-    TextEdit, LineEdit,InfoBar, InfoBarPosition
+    StrongBodyLabel, SubtitleLabel, TextEdit, TextBox,
+    SimpleListWidget, InfoBar, InfoBarPosition
 )
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget
 from logic.adb_tool import run_adb_command
@@ -64,7 +65,7 @@ class ADBPage(FluentWindow):
 
         # 自定义命令部分
         self.custom_layout = QHBoxLayout()
-        self.custom_command_box = LineEdit(placeholderText="请输入自定义 ADB 或 Fastboot 命令")
+        self.custom_command_box = TextBox(placeholderText="请输入自定义 ADB 或 Fastboot 命令")
         self.custom_run_btn = PrimaryPushButton("执行自定义命令")
         self.custom_run_btn.clicked.connect(self.run_custom_command)
 

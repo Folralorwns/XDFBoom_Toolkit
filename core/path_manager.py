@@ -39,7 +39,3 @@ MTKCLIENT_DIR = RES / "Toolkit" / "mtkclient-main"
 MTK_SCRIPT_PATH = MTKCLIENT_DIR / "mtk.py"
 MTK_EXAMPLES_DIR = MTKCLIENT_DIR / "examples"
 
-#ADB
-ADB_PATH = RES / 'Toolkit' / 'ADB' / 'adb.exe'
-FASTBOOT_PATH = RES / 'Toolkit' / 'ADB' / 'fastboot.exe'
-
