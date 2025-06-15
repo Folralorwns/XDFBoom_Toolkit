@@ -41,3 +41,14 @@ Traceback (most recent call last):
   File "d:\Folra程序\新东方N1\XDFBoom_Toolkit\logic\adb_tool.py", line 5, in <module>
     from core.path_manager import ADB_PATH
 ImportError: cannot import name 'ADB_PATH' from 'core.path_manager' (d:\Folra程序\新东方N1\XDFBoom_Toolkit\core\path_manager.py)
+[2025-06-15 16:01:26] [ERROR] [logging_config.py:52] 未捕获的异常
+Traceback (most recent call last):
+  File "d:\快速访问\DOCUMENT\GitHub\XDFBoom_Toolkit\main.py", line 3, in <module>
+    from gui.FluentMainWindow import FluentMainWindow
+  File "d:\快速访问\DOCUMENT\GitHub\XDFBoom_Toolkit\gui\FluentMainWindow.py", line 13, in <module>
+    from gui.pages.adb_page import ADBPage
+  File "d:\快速访问\DOCUMENT\GitHub\XDFBoom_Toolkit\gui\pages\adb_page.py", line 7, in <module>
+    from logic.adb_tool import run_adb_command
+  File "d:\快速访问\DOCUMENT\GitHub\XDFBoom_Toolkit\logic\adb_tool.py", line 5, in <module>
+    from core.path_manager import ADB_PATH
+ImportError: cannot import name 'ADB_PATH' from 'core.path_manager' (d:\快速访问\DOCUMENT\GitHub\XDFBoom_Toolkit\core\path_manager.py)

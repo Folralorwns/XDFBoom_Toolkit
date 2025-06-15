@@ -1,11 +1,7 @@
 import os
 import time
 import subprocess
-from core.path_manager import RES  # resources 根目录
-
-# 设定 ADB 工具路径
-ADB_PATH = RES / 'Toolkit' / 'ADB' / 'adb.exe'
-FASTBOOT_PATH = RES / 'Toolkit' / 'ADB' / 'fastboot.exe'
+from core.path_manager import RES,ADB_PATH,FASTBOOT_PATH  # resources 根目录
 
 def adb(command: str):
     """执行 adb 命令（非 shell）"""
