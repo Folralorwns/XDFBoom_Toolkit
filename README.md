@@ -14,7 +14,7 @@
 
 > [!IMPORTANT]  
 > 最低系统要求：Windows 10 x64<br>
-> 目前此程序仅兼容未启用DAA/SLA的机器，如果您的机器在使用程序时出现DAA_SIG_VERIFY_FAILED(0x7024),那就是您的机器启用了DAA/SLA
+> 目前此程序仅兼容未熔断的机器，如果您的机器在使用程序时出现DAA_SIG_VERIFY_FAILED(0x7024),那就是您的机器被熔断了
 
 ## 📄 License / 许可协议
 
